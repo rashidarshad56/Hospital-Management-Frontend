@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ankitha – Patient Stay Details</title>
+     <link rel="stylesheet" th:href="@{/css/styles.css}"/>
+</head>
+<body class="bg-light">
+<div class="container mt-5">
+    <h2 class="mb-3">
+        Stay Details:
+        <span th:text="${patient != null ? patient.name : 'SSN ' + ssn}"></span>
+    </h2>
+
+    <div th:if="${patient != null}" class="mb-4">
+        <p><strong>SSN:</strong> <span th:text="${patient.ssn}"></span></p>
+        <p><strong>Phone:</strong> <span th:text="${patient.phone}"></span></p>
+        <p><strong>Insurance ID:</strong> <span th:text="${patient.insuranceId}"></span></p>
+    </div>
+
+    <table class="table table-bordered" th:if="${stays != null and #lists.size(stays) > 0}">
+        <thead>
+        <tr>
+            <th>Room</th>
+            <th>Stay Start</th>
+            <th>Stay End</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="stay : ${stays}">
+            <td th:text="${stay.room}"></td>
+            <td th:text="${stay.stayStart}"></td>
+            <td th:text="${stay.stayEnd}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div th:if="${stays != null and #lists.size(stays) == 0}" class="alert alert-info">
+        <span th:text="${message != null ? message : 'No stays found for this patient.'}"></span>
+    </div>
+
+    <a th:href="@{/ankitha-patients}" class="btn btn-secondary mt-3">← Back to Patients</a>
+</div>
+</body>
+</html>
