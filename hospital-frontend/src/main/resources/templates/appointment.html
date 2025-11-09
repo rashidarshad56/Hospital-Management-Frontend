@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Appointments by Physician</title>
+  <link rel="stylesheet" th:href="@{/css/styles.css}"/>
+</head>
+<body>
+<header class="topbar">
+  <h1>Appointments</h1>
+  <nav>
+    <a th:href="@{/}">Home</a>
+    <a th:href="@{/physician}">Physicians</a>
+  </nav>
+</header>
+
+<main class="container">
+  <a class="back" th:href="@{/physician}">← Back to Physicians Directory</a>
+
+  <h2 th:text="'Appointments for: ' + (${appointments != null and #lists.size(appointments) > 0 ? appointments[0].physicianName : 'ID ' + employeeId})"></h2>
+
+  <div class="table-card" th:if="${appointments != null and #lists.size(appointments) > 0}">
+    <table class="table">
+      <thead class="table-head">
+        <tr>
+          <th>Appointment ID</th>
+          <th>Patient Name</th>
+          <th>Address</th>
+          <th>Phone</th>
+          <th>Start Time</th>
+          <th>End Time</th>
+          <th>Examination Room</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="appt : ${appointments}">
+          <td th:text="${appt.appointmentId}">A01</td>
+          <td th:text="${appt.patientName}">Ravi Kumar</td>
+          <td th:text="${appt.address}">Delhi</td>
+          <td th:text="${appt.phone}">9876543210</td>
+          <td th:text="${appt.starto}">2025-11-09 10:00</td>
+          <td th:text="${appt.endo}">2025-11-09 10:30</td>
+          <td th:text="${appt.examinationRoom}">Room 4</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="table-card" th:if="${appointments == null or #lists.size(appointments) == 0}">
+    <p style="padding:16px;" th:text="${errorMessage != null ? errorMessage : 'No appointments found.'}"></p>
+  </div>
+</main>
+
+<footer class="footer">© Hospital Portal</footer>
+</body>
+</html>

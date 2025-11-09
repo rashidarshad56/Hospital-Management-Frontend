@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Gayatri's Patient List</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}"/>
+    <style>
+        /* You can move this to your CSS file */
+        .table-card {
+            overflow-x: auto;
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .table th, .table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .table tr {
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        .table tr:hover {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+<header class="topbar">
+  <h1>Hospital Portal</h1>
+  <nav>
+    <a th:href="@{/}">Home</a>
+  </nav>
+</header>
+
+<main class="container">
+    <h1>Patient List</h1>
+
+    <div class="table-card" th:if="${patientnew != null}">
+        <table class="table">
+            <thead class="table-head">
+                <tr>
+                    <th>SSN</th>
+                    <th>Name</th>
+                    <th>Address</th>
+                    <th>Phone</th>
+                    <th>Insurance ID</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="p : ${patientnew}"
+                    th:onclick="'window.location.href=\'/patient/' + ${p.ssn} + '\';'">
+                    <td th:text="${p.ssn ?: 'N/A'}"></td>
+                    <td th:text="${p.name ?: 'N/A'}"></td>
+                    <td th:text="${p.address ?: 'N/A'}"></td>
+                    <td th:text="${p.phone ?: 'N/A'}"></td>
+                    <td th:text="${p.insuranceId ?: 'N/A'}"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</main>
+
+<footer class="footer">© Hospital Portal</footer>
+</body>
+</html>

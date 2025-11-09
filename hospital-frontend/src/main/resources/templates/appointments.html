@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <title th:text="'Appointments — Patient ' + ${patientId}">Appointments</title>
+  <link rel="stylesheet" th:href="@{/css/styles.css}"/>
+</head>
+<body>
+<header class="topbar">
+  <h1 th:text="'Appointments — Patient ' + ${patientId}">Appointments</h1>
+  <nav>
+    <a th:href="@{/}">Home</a>
+   
+  </nav>
+</header>
+
+<main class="container">
+  <a class="back" th:href="@{/patients}">← Back to Patients</a>
+
+  <div class="table-card">
+    <table class="table">
+      <thead class="table-head">
+        <tr>
+          <th>Appointment ID</th>
+          <th>Start</th>
+          <th>End</th>
+          <th>Room</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="appt : ${appointments}">
+          <td th:text="${appt.appointmentId}">1</td>
+          <td th:text="${#temporals.format(appt.starto, 'yyyy-MM-dd HH:mm')}">Start</td>
+          <td th:text="${#temporals.format(appt.endo, 'yyyy-MM-dd HH:mm')}">End</td>
+          <td><span class="badge" th:text="${appt.examinationRoom}">A-101</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</main>
+
+<footer class="footer">© Hospital Portal</footer>
+</body>
+</html>

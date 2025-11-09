@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Physicians</title>
+  <link rel="stylesheet" th:href="@{/css/styles.css}"/>
+</head>
+<body>
+<header class="topbar">
+  <h1 th:text="'Physicians — ' + ${department.departmentName}">Physicians</h1>
+  <nav>
+    <a th:href="@{/}">Home</a>
+  
+  </nav>
+</header>
+
+<main class="container">
+  <a class="back" th:href="@{/departments}">← Back to Departments</a>
+
+  <div class="table-card">
+    <table class="table">
+      <thead class="table-head">
+        <tr>
+          <th>Name</th>
+          <th>Position</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="physician : ${department.physicians}">
+          <td th:text="${physician.name}">Dr. Jane Doe</td>
+          <td>
+            <span class="badge" th:text="${physician.position}">Senior</span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</main>
+
+<footer class="footer">© Hospital Portal</footer>
+</body>
+</html>

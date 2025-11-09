@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Nurses</title>
+  <link rel="stylesheet" th:href="@{/css/styles.css}"/>
+  <script>
+    function rowNav(href){ if(href){ window.location = href; } }
+  </script>
+</head>
+<body>
+<header class="topbar">
+  <h1>Nurses</h1>
+  <!-- No nav per your requirement -->
+  <nav>
+    <a th:href="@{/}">Home</a>
+    
+  </nav>
+</header>
+
+<main class="container">
+  <div class="table-card">
+    <table class="table">
+      <thead class="table-head">
+        <tr>
+          <th>Employee ID</th>
+          <th>Name</th>
+          <th>Position</th>
+          <th>Registered</th>
+          <th>SSN</th>
+          <th class="meta">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="n : ${nurses}"
+            th:attr="data-href=@{'/nurses/' + ${n.employeeId}}"
+            th:onclick="|rowNav(this.getAttribute('data-href'))|">
+          <td th:text="${n.employeeId}">1</td>
+          <td th:text="${n.name}">Jane Doe</td>
+          <td><span class="badge" th:text="${n.position}">Head Nurse</span></td>
+          <td th:text="${n.registered}">Y</td>
+          <td th:text="${n.ssn}">1234</td>
+          <td class="meta">Click row for OnCall →</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+   <div class="actions" style="margin-top:12px;">
+      <a th:href="@{/}">← Back to Nurses</a>
+    </div>
+</main>
+
+<footer class="footer">© Hospital Portal</footer>
+</body>
+</html>

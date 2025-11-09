@@ -1,0 +1,47 @@
+<!-- templates/prescriptions.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Prescriptions</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}"/>
+</head>
+<body>
+<div class="container">
+    <h1 th:text="'Prescriptions for Patient ID: ' + ${patientId}"></h1>
+
+    <div class="panel" th:if="${prescriptions != null and prescriptions.length > 0}">
+        <table>
+            <thead>
+                <tr>
+                    <th>&nbsp;&nbsp;Patient&nbsp;ID&nbsp;&nbsp;</th>
+                    <th>&nbsp;&nbsp;Patient&nbsp;Name&nbsp;&nbsp;</th>
+                    <th>&nbsp;&nbsp;Physician&nbsp;Name&nbsp;&nbsp;</th>
+                    <th>&nbsp;&nbsp;Physician&nbsp;Position&nbsp;&nbsp;</th>
+                    <th>&nbsp;&nbsp;Medication&nbsp;&nbsp;</th>
+                    <th>&nbsp;&nbsp;Dose&nbsp;&nbsp;</th>
+                    <th>&nbsp;&nbsp;Date&nbsp;Time&nbsp;&nbsp;</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="p : ${prescriptions}">
+                    <td>&nbsp;&nbsp;<span th:text="${p.patientId}"></span>&nbsp;&nbsp;</td>
+                    <td>&nbsp;&nbsp;<span th:text="${p.patientName}"></span>&nbsp;&nbsp;</td>
+                    <td>&nbsp;&nbsp;<span th:text="${p.physicianName}"></span>&nbsp;&nbsp;</td>
+                    <td>&nbsp;&nbsp;<span th:text="${p.physicianPosition}"></span>&nbsp;&nbsp;</td>
+                    <td>&nbsp;&nbsp;<span th:text="${p.medicationName}"></span>&nbsp;&nbsp;</td>
+                    <td>&nbsp;&nbsp;<span th:text="${p.dose}"></span>&nbsp;&nbsp;</td>
+                    <td>&nbsp;&nbsp;<span th:text="${#temporals.format(p.date, 'yyyy-MM-dd HH:mm')}"></span>&nbsp;&nbsp;</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="panel" th:if="${noPrescriptions}">
+        <p>No prescriptions available for this patient.</p>
+    </div>
+
+    <a href="/patientnew" class="back-btn">⬅ Back to Patients</a>
+</div>
+</body>
+</html>

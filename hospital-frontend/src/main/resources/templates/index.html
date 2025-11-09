@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Hospital Portal — Home</title>
+  <link rel="stylesheet" th:href="@{/css/styles.css}"/>
+</head>
+<body>
+<header class="topbar">
+  <h1>Hospital Portal</h1>
+
+</header>
+
+<main class="container">
+  <h2>Explore Modules</h2>
+
+  <div class="tile-grid">
+    <!-- 1: Patients -->
+    <a class="tile" th:href="@{/patients}">
+      <img th:src="@{/img/phan.jpg}" alt="Phanindra"/>
+      <div class="tile-title">Durga Phanindra</div>
+      <div class="tile-sub">Team Member</div>
+    </a>
+
+    <!-- 2: Departments -->
+    <a class="tile" th:href="@{/departments}">
+      <img th:src="@{/img/rashid.jpg}" alt="Rashid Arshad"/>
+      <div class="tile-title">Rashid Arshad</div>
+      <div class="tile-sub">Team Member</div>
+    </a>
+
+    <!-- 3: Physicians (example: default to Dept 1 list) -->
+    <a class="tile" th:href="@{/nurses}">
+      <img th:src="@{/img/Laasya.jpg}" alt="Laasya"/>
+      <div class="tile-title">Laasya</div>
+      <div class="tile-sub">Team Member</div>
+    </a>
+
+    <!-- 4–7: placeholders (link to # or future endpoints) -->
+    <!-- 3: Physicians (example: default to Dept 1 list) -->
+  <a class="tile" th:href="@{/floors}">
+  <img th:src="@{/img/Jwalitha.jpg}" alt="Jwalitha"/>
+  <div class="tile-title">Jwalitha</div>
+  <div class="tile-sub">Team Member</div>
+</a>
+ 
+ 
+   <a class="tile" th:href="@{/patientnew}">
+  <img th:src="@{/img/Gayatri.jpg}" alt="Gayatri"/>
+  <div class="tile-title">Gayatri</div>
+  <div class="tile-sub">Team Member</div>
+</a>
+ 
+   <a class="tile" th:href="@{/physician}">
+  <img th:src="@{/img/nikhita.jpg}" alt="Nikhitha"/>
+  <div class="tile-title">Nikhitha</div>
+  <div class="tile-sub">Team Member</div>
+</a>
+   <a class="tile" th:href="@{/ankitha-patients}">
+  <img th:src="@{/img/Ankitha.jpg}" alt="Ankitha"/>
+  <div class="tile-title">Ankitha</div>
+  <div class="tile-sub">Team Member</div>
+</a>
+
+  </div>
+</main>
+
+<footer class="footer">© Hospital Portal</footer>
+</body>
+</html>

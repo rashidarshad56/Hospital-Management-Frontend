@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Patient Stay Details</title>
+    <style>
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #eef3f8;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        h1 {
+            font-size: 30px;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 25px;
+        }
+        .panel {
+            background: #ffffff;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            margin-bottom: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            border: 2px solid #b0b0b0;
+        }
+        th, td {
+            padding: 14px;
+            border: 1.5px solid #b0b0b0;
+        }
+        thead th {
+            background: #dfe7f3;
+            font-weight: bold;
+            font-size: 15px;
+            border: 1.5px solid #9a9a9a;
+        }
+        .back-link {
+            display: inline-block;
+            margin-top: 20px;
+            text-decoration: none;
+            color: #1a73e8;
+            font-weight: 600;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+            color: #145bb5;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>
+        Patient Stay Details:
+        <span th:text="${patient != null ? patient.name : 'SSN ' + ssn}"></span>
+    </h1>
+
+    <!-- Patient Info -->
+    <div class="panel" th:if="${patient != null}">
+        <p><strong>SSN:</strong> <span th:text="${patient.ssn}"></span></p>
+        <p><strong>Name:</strong> <span th:text="${patient.name}"></span></p>
+        <p><strong>Address:</strong> <span th:text="${patient.address}"></span></p>
+        <p><strong>Phone:</strong> <span th:text="${patient.phone}"></span></p>
+        <p><strong>Insurance ID:</strong> <span th:text="${patient.insuranceId}"></span></p>
+        <p><strong>PCP:</strong> <span th:text="${patient.pcp}"></span></p>
+    </div>
+
+    <!-- Stay Table -->
+    <div class="panel" th:if="${stays != null and #lists.size(stays) > 0}">
+        <h3>Stay Information</h3>
+        <table>
+            <thead>
+            <tr>
+                <th>Room</th>
+                <th>Stay Start</th>
+                <th>Stay End</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="stay : ${stays}">
+                <td th:text="${stay.room}"></td>
+                <td th:text="${stay.stayStart}"></td>
+                <td th:text="${stay.stayEnd}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Message if no stays -->
+    <div class="panel" th:if="${stays != null and #lists.size(stays) == 0}">
+        <p th:text="${message != null ? message : 'No stays found for this patient.'}"></p>
+    </div>
+
+    <!-- Error fallback -->
+    <div class="panel" th:if="${error}">
+        <p style="color: red;" th:text="${error}"></p>
+    </div>
+
+    <a class="back-link" th:href="@{/}">← Back to Patients Directory</a>
+</div>
+</body>
+</html>

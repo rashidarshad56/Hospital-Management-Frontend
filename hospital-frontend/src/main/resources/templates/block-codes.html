@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Block Codes</title>
+ <link rel="stylesheet" th:href="@{/css/styles.css}"/>
+</head>
+<body>
+<div class="container">
+  <h1 th:text="'Block Codes for Floor: ' + ${floor}"></h1>
+  <div class="panel" th:if="${codes != null}">
+    <ul>
+      <li th:each="code : ${codes}">
+        <a class="code-link" th:href="@{/rooms/{floor}/{code}(floor=${floor}, code=${code.blockCode})}" th:text="'Code ' + ${code.blockCode}"></a>
+      </li>
+    </ul>
+  </div>
+  <a href="/" class="back-btn">⬅ Back to Floors</a>
+</div>
+</body>
+</html>

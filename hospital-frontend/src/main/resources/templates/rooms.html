@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Rooms</title>
+  <link rel="stylesheet" th:href="@{/css/styles.css}"/>
+</head>
+<body>
+<div class="container">
+  <h1 th:text="'Rooms in Block Floor ' + ${floor} + ', Code ' + ${code}"></h1>
+  <div class="panel" th:if="${rooms != null and #arrays.length(rooms) > 0}">
+    <table>
+      <thead>
+        <tr>
+          <th>Room Number</th>
+          <th>Room Type</th>
+          <th>Unavailable</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="room : ${rooms}">
+          <td th:text="${room.roomNumber}"></td>
+          <td th:text="${room.roomType}"></td>
+          <td th:text="${room.unavailable}"></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="panel" th:if="${rooms == null or #arrays.length(rooms) == 0}">
+    <p>No rooms found.</p>
+  </div>
+  <a th:href="@{/floor/{floor}(floor=${floor})}" class="back-btn">⬅ Back to Block Codes</a>
+</div>
+</body>
+</html>

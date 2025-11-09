@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <title th:text="'Nurse ' + ${detail.employeeId} + ' — OnCall'">Nurse OnCall</title>
+  <link rel="stylesheet" th:href="@{/css/styles.css}"/>
+</head>
+<body>
+<header class="topbar">
+  <h1 th:text="'Nurse ' + ${detail.employeeId} + ' — ' + ${detail.name}">Nurse</h1>
+</header>
+
+<main class="container">
+  <!-- Error message from API -->
+  <div th:if="${detail.message != null}" class="table-card" style="padding:14px;">
+    <strong th:text="${detail.message}">Nurse not found</strong>
+    <div class="actions"><a th:href="@{/nurses}">Back to Nurses</a></div>
+  </div>
+
+  <!-- Detail content -->
+  <div th:if="${detail.message == null}">
+    <!-- Nurse info -->
+    <div class="table-card" style="margin-bottom:16px;">
+      <table class="table">
+        <thead class="table-head"><tr><th colspan="6">Nurse Info</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><strong>Employee ID</strong></td>
+            <td th:text="${detail.employeeId}">103</td>
+            <td><strong>Name</strong></td>
+            <td th:text="${detail.name}">Paul Flowers</td>
+            <td><strong>Position</strong></td>
+            <td th:text="${detail.position}">Nurse</td>
+          </tr>
+          <tr>
+            <td><strong>Registered</strong></td>
+            <td th:text="${detail.registered}">false</td>
+            <td><strong>SSN</strong></td>
+            <td th:text="${detail.ssn}">333333330</td>
+            <td></td><td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- OnCalls: nurseId, onCallStart, onCallEnd -->
+    <div class="table-card">
+      <table class="table">
+        <thead class="table-head">
+          <tr>
+            <th>#</th>
+            <th>Nurse ID</th>
+            <th>On-Call Start</th>
+            <th>On-Call End</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="oc,idx : ${detail.onCalls}">
+            <td th:text="${idx.index + 1}">1</td>
+            <td th:text="${oc.nurseId}">103</td>
+
+            <!-- Render the ISO strings directly, or format if you later switch to LocalDateTime -->
+            <td th:text="${oc.onCallStart}">2008-11-04T19:00:00</td>
+            <td th:text="${oc.onCallEnd}">2008-11-05T03:00:00</td>
+          </tr>
+
+          <tr th:if="${detail.onCalls == null or #lists.isEmpty(detail.onCalls)}">
+            <td colspan="4" class="meta">No on-call records.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="actions" style="margin-top:12px;">
+      <a th:href="@{/nurses}">← Back to Nurses</a>
+    </div>
+  </div>
+</main>
+
+<footer class="footer">© Hospital Portal</footer>
+</body>
+</html>

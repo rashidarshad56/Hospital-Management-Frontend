@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Block Floors</title>
+ <link rel="stylesheet" th:href="@{/css/styles.css}"/>
+</head>
+<body>
+<div class="container">
+  <h1>Available Block Floors</h1>
+  <div class="panel" th:if="${floors != null}">
+    <ul>
+      <li th:each="floor : ${floors}">
+        <a class="floor-link" th:href="@{/floor/{floor}(floor=${floor})}" th:text="'Floor ' + ${floor}"></a>
+      </li>
+    </ul>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Ankitha – Patient List</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}"/>
+</head>
+<body>
+<div class="container mt-5">
+    <h2 class="mb-4">Patient Directory</h2>
+
+    <table class="table table-bordered table-striped">
+        <thead>
+        <tr>
+            <th>SSN</th>
+            <th>Name</th>
+            <th>Address</th>
+            <th>Phone</th>
+            <th>Insurance ID</th>
+            <th>PCP</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="patient : ${patients}">
+            <td th:text="${patient.ssn}"></td>
+            <td th:text="${patient.name}"></td>
+            <td th:text="${patient.address}"></td>
+            <td th:text="${patient.phone}"></td>
+            <td th:text="${patient.insuranceId}"></td>
+            <td th:text="${patient.pcp}"></td>
+            <td>
+                <a th:href="@{'/ankitha-patient/' + ${patient.ssn}}" class="btn btn-primary btn-sm">View Stays</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <a href="/" class="btn btn-secondary mt-3">← Back to Home</a>
+</div>
+</body>
+</html>
+
