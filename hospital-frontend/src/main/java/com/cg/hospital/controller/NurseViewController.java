@@ -11,7 +11,7 @@ import org.springframework.web.client.RestTemplate;
 
 @Controller
 public class NurseViewController {
-
+         
     @Autowired
     private RestTemplate restTemplate;
 
@@ -38,3 +38,4 @@ public class NurseViewController {
         return "nurse-detail"; // templates/nurse-detail.html
     }
 }
+
