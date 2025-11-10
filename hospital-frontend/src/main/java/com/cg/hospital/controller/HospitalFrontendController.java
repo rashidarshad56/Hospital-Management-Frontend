@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 @Controller
-
 public class HospitalFrontendController {
 
     private final RestTemplate restTemplate;
@@ -59,4 +58,5 @@ public class HospitalFrontendController {
         model.addAttribute("code", code);
         return "rooms";
     }
+
 }
