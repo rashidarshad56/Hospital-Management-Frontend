@@ -80,3 +80,4 @@ public class AnkithaFrontendController {
         return "ankitha-patient-details";
     }
 }
+
